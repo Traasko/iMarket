@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ContenuPanier{% endblock %}
+
+{% block body %}
+    <h1>Create new ContenuPanier</h1>
+
+    {{ include('contenu_panier/_form.html.twig') }}
+
+    <a href="{{ path('app_contenu_panier_index') }}">back to list</a>
+{% endblock %}
