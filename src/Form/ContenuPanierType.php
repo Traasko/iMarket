@@ -15,8 +15,7 @@ class ContenuPanierType extends AbstractType
             ->add('quantite')
             ->add('ajout')
             ->add('produit')
-            ->add('panier')
-        ;
+            ->add('panier');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

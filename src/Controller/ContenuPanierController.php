@@ -29,14 +29,18 @@ class ContenuPanierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($contenuPanier->isQuantite()) {
+                $contenuPanier->setDate(new \DateTime());
+            }
+
             $contenuPanierRepository->save($contenuPanier, true);
 
-            return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('contenu_panier/new.html.twig', [
+        return $this->render('contenu_panier/new.html.twig', [
             'contenu_panier' => $contenuPanier,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -62,14 +66,14 @@ class ContenuPanierController extends AbstractController
 
         return $this->renderForm('contenu_panier/edit.html.twig', [
             'contenu_panier' => $contenuPanier,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_contenu_panier_delete', methods: ['POST'])]
     public function delete(Request $request, ContenuPanier $contenuPanier, ContenuPanierRepository $contenuPanierRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$contenuPanier->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $contenuPanier->getId(), $request->request->get('_token'))) {
             $contenuPanierRepository->remove($contenuPanier, true);
         }
 

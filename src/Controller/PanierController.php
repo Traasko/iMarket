@@ -29,14 +29,19 @@ class PanierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($panier->isEtat()) {
+                $panier->setAchat(new \DateTime());
+            }
+            $panier->setUser($this->getUser());
+
             $panierRepository->save($panier, true);
 
             return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('panier/new.html.twig', [
+        return $this->render('panier/new.html.twig', [
             'panier' => $panier,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -60,16 +65,16 @@ class PanierController extends AbstractController
             return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('panier/edit.html.twig', [
+        return $this->render('panier/edit.html.twig', [
             'panier' => $panier,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_panier_delete', methods: ['POST'])]
     public function delete(Request $request, Panier $panier, PanierRepository $panierRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$panier->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $panier->getId(), $request->request->get('_token'))) {
             $panierRepository->remove($panier, true);
         }
 

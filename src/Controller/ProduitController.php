@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/produit')]
 class ProduitController extends AbstractController
@@ -22,21 +24,41 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProduitRepository $produitRepository): Response
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $produitRepository->save($produit, true);
+            $photo = $form->get('photo')->getData();
 
-            return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+            if ($photo) {
+                $newFilename = uniqid() . '.' . $photo->guessExtension();
+
+                try {
+                    $photo->move(
+                        $this->getParameter('upload_dir'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash('danger', $e->getMessage());
+                    return $this->redirectToRoute('app_produit');
+                }
+
+                $produit->setPhoto($newFilename);
+            }
+            $em->persist($produit);
+            $em->flush();
+
+            $this->addFlash('success', 'Produit ajouté');
         }
 
-        return $this->renderForm('produit/new.html.twig', [
+        $produit = $em->getRepository(Produit::class)->findAll();
+
+        return $this->render('produit/new.html.twig', [
             'produit' => $produit,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -49,30 +71,61 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
+    public function edit(Request $request, Produit $produit, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(ProduitType::class, $produit);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $produitRepository->save($produit, true);
-
-            return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+        if ($produit == null) {
+            $this->addFlash('danger', 'Produit introuvable');
+            return $this->redirectToRoute('app_produit_edit');
         }
 
-        return $this->renderForm('produit/edit.html.twig', [
+        $form = $this->createForm(ProduitType::class, $produit);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $photo = $form->get('photo')->getData();
+
+            if ($photo) {
+                $newFilename = uniqid() . '.' . $photo->guessExtension();
+
+                try {
+                    $photo->move(
+                        $this->getParameter('upload_dir'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash('danger', $e->getMessage());
+                    return $this->redirectToRoute('app_produit_edit');
+                }
+
+                // Suppression de l'ancienne image
+                unlink($this->getParameter('upload_dir') . '/' . $produit->getPhoto());
+
+                $produit->setPhoto($newFilename);
+            }
+
+            $em->persist($produit);
+            $em->flush();
+
+            $this->addFlash('success', 'Produit mise à jour');
+        }
+
+        return $this->render('produit/edit.html.twig', [
             'produit' => $produit,
-            'form' => $form,
+            'form' => $form->createView()
         ]);
     }
 
     #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
-    public function delete(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
+    public function delete(EntityManagerInterface $em, Produit $produit): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
-            $produitRepository->remove($produit, true);
+        if ($produit == null) {
+            $this->addFlash('danger', 'Marque introuvable');
+        } else {
+            unlink($this->getParameter('upload_dir') . '/' . $produit->getPhoto());
+            $em->remove($produit);
+            $em->flush();
+            $this->addFlash('warning', 'Produit supprimée');
         }
-
-        return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_produit_index');
     }
 }
