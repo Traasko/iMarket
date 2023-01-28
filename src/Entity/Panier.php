@@ -25,11 +25,13 @@ class Panier
     #[ORM\ManyToOne(inversedBy: 'paniers')]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'panier', targetEntity: ContenuPanier::class)]
+    #[ORM\OneToMany(mappedBy: 'panier', targetEntity: ContenuPanier::class, orphanRemoval: true)]
     private Collection $contenuPaniers;
 
     public function __construct()
     {
+        $this->etat = 0;
+        $this->achat = new \DateTime();
         $this->contenuPaniers = new ArrayCollection();
     }
 

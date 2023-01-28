@@ -106,7 +106,7 @@ class ProduitController extends AbstractController
             $em->persist($produit);
             $em->flush();
 
-            $this->addFlash('success', 'Produit mise à jour');
+            $this->addFlash('success', 'Produit mis à jour');
         }
 
         return $this->render('produit/edit.html.twig', [
