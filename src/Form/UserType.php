@@ -12,12 +12,18 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('roles')
-            ->add('password')
             ->add('nom')
             ->add('prenom')
-        ;
+            ->add('email');
+        // ->add('user', UserType::class, array(
+        //     'choices' => array(
+        //         'email' => 'email',
+        //         'roles' => 'roles',
+        //         'password' => 'password',
+        //         'nom' => 'nom',
+        //         'prenom' => 'prenom',
+        //     ),
+        // ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

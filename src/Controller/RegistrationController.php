@@ -42,6 +42,7 @@ class RegistrationController extends AbstractController
                 $authenticator,
                 $request
             );
+            $this->addFlash('succes', 'Vous êtes bien inscrit');
         }
 
         return $this->render('registration/register.html.twig', [

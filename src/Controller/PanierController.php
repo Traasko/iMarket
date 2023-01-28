@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Panier;
 use App\Form\PanierType;
 use App\Repository\PanierRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/panier')]
 class PanierController extends AbstractController
@@ -29,14 +30,14 @@ class PanierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($panier->isEtat()) {
-                $panier->setAchat(new \DateTime());
-            }
+            $panier->setAchat(new \DateTime());
             $panier->setUser($this->getUser());
 
             $panierRepository->save($panier, true);
 
             return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+
+            $this->addFlash('succes', 'Article ajouté');
         }
 
         return $this->render('panier/new.html.twig', [
@@ -63,6 +64,8 @@ class PanierController extends AbstractController
             $panierRepository->save($panier, true);
 
             return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+
+            $this->addFlash('success', 'Article modifié');
         }
 
         return $this->render('panier/edit.html.twig', [
@@ -79,5 +82,23 @@ class PanierController extends AbstractController
         }
 
         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+
+        $this->addFlash('warning', 'Article supprimé');
+    }
+
+    #[Route('/etat/{id}', name: 'panier_etat')]
+    public function etat(Panier $panier = null, EntityManagerInterface $em)
+    {
+        if ($panier != null) {
+            if ($panier->isEtat()) {
+                $panier->setEtat(false);
+            } else {
+                $panier->setEtat(true);
+            }
+            $em->persist($panier);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('app_article_show', ['id' => $panier->getContenuPaniers()->getId()]);
     }
 }

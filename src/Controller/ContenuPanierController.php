@@ -29,12 +29,13 @@ class ContenuPanierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-                $contenuPanier->setAjout(new \DateTime());
-            
+            $contenuPanier->setAjout(new \DateTime());
+
             $contenuPanierRepository->save($contenuPanier, true);
 
-            return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
+
+            $this->addFlash('success', 'Contenu ajouté');
         }
 
         return $this->render('contenu_panier/new.html.twig', [
@@ -61,9 +62,11 @@ class ContenuPanierController extends AbstractController
             $contenuPanierRepository->save($contenuPanier, true);
 
             return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
+
+            $this->addFlash('success', 'Contenu modifier');
         }
 
-        return $this->renderForm('contenu_panier/edit.html.twig', [
+        return $this->render('contenu_panier/edit.html.twig', [
             'contenu_panier' => $contenuPanier,
             'form' => $form->createView(),
         ]);
@@ -74,6 +77,8 @@ class ContenuPanierController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $contenuPanier->getId(), $request->request->get('_token'))) {
             $contenuPanierRepository->remove($contenuPanier, true);
+
+            $this->addFlash('warning', 'Contenu  supprimé');
         }
 
         return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
