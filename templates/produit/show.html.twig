@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {# Liaison avec le fichier CSS #}
-    {% block link %}<link rel="stylesheet" type="text/css" href="{{ asset('/css/produit_style.css') }}">{% endblock %}
+    {% block link %}<link rel="stylesheet" type="text/css" href="{{ asset('/css/produitCSS/produit_style.css') }}">{% endblock %}
 {% block title %}{{ produit.nom }}{% endblock %}
 
 
@@ -13,8 +13,11 @@
         <div id="div_float_left">
             <div>
                 <tr>
-                    <td>Photo :</td>
-                    <td>{{ produit.photo }}</td>
+                    {# Partie visible que par les ROLE_ADMIN #}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <td>{{'photo'|trans}} :</td>
+                    {% endif %}
+                    <td><img src="{{ asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}"/></td>
                 </tr>
             </div>
             {# Partie visible que par les ROLE_ADMIN #}
@@ -32,14 +35,14 @@
                 <tr>
                 {# Partie visible que par les ROLE_ADMIN #}
                 {% if is_granted('ROLE_ADMIN') %}
-                    <td>Nom :</td>
+                    <td>{{'nom'|trans}} :</td>
                 {% endif %}
                     <td><h2>{{ produit.nom }}</h2></td>
                 </tr>
             </div>
             <div>
                 <tr>
-                    <td>Prix :</td>
+                    <td>{{'prix'|trans}} :</td>
                     <td>{{ produit.prix }} €</td>
                 </tr>
             </div>
@@ -62,10 +65,10 @@
         </tr>
     </div> 
 </div>
-    <a href="{{ path('app_produit_index') }}" id="button_back" class="btn btn-secondary">Back to list</a>
+    <a href="{{ path('app_produit_index') }}" id="button_back" class="btn btn-secondary">{{'back to list'|trans}}</a>
     {# Partie visible que par les ROLE_ADMIN #}
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning">Edit</a>
+    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning">{{'edit'|trans}}</a>
 
     {{ include('produit/_delete_form.html.twig') }}
     {% endif %}

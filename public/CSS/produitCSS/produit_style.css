@@ -15,6 +15,9 @@ body{
     padding: 10px;
 }
 
+a.btn.btn-primary {
+    margin-bottom: 20px;
+}
 /* Vue du Produit à l'acceuil */
 #div_produit {
   border: 1px solid;
@@ -38,13 +41,14 @@ h1{
 }
 
 
+
 /* Vue du produit en détail */
 
-#div_produit_show{
+/* #div_produit_show{
     border: 1px solid;
     border-radius: 10px;
     background-color: blue;
-}
+} */
 
 div#div_produit_show {
     display: inline-block;
@@ -52,12 +56,12 @@ div#div_produit_show {
 
 #div_float_right{
     float: right;
-    background-color: red;
+    /* background-color: red; */
 }
 
 #div_float_left{
     float: left;
-    background-color:green;
+    /* background-color:green; */
 }
 
 div#div_produit_show {

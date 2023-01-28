@@ -11,8 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/produit')]
+#[Route('/acceuil')]
 class ProduitController extends AbstractController
 {
     #[Route('/', name: 'app_produit_index', methods: ['GET'])]
@@ -24,7 +25,7 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function new(Request $request, EntityManagerInterface $em, TranslatorInterface $t): Response
     {
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
@@ -51,7 +52,7 @@ class ProduitController extends AbstractController
             $em->persist($produit);
             $em->flush();
 
-            $this->addFlash('success', 'Produit ajouté');
+            $this->addFlash('success', $t->trans('produit.ajoutee'));
         }
 
         $produit = $em->getRepository(Produit::class)->findAll();
@@ -71,10 +72,10 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Produit $produit, EntityManagerInterface $em): Response
+    public function edit(Request $request, Produit $produit, EntityManagerInterface $em, TranslatorInterface $t): Response
     {
         if ($produit == null) {
-            $this->addFlash('danger', 'Produit introuvable');
+            $this->addFlash('danger', $t->trans('produit.introuvable'));
             return $this->redirectToRoute('app_produit_edit');
         }
 
@@ -106,7 +107,7 @@ class ProduitController extends AbstractController
             $em->persist($produit);
             $em->flush();
 
-            $this->addFlash('success', 'Produit mise à jour');
+            $this->addFlash('success', $t->trans('produit.mise_a_jour'));
         }
 
         return $this->render('produit/edit.html.twig', [
@@ -116,15 +117,15 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
-    public function delete(EntityManagerInterface $em, Produit $produit): Response
+    public function delete(EntityManagerInterface $em, Produit $produit, TranslatorInterface $t): Response
     {
         if ($produit == null) {
-            $this->addFlash('danger', 'Marque introuvable');
+            $this->addFlash('danger', $t->trans('produit.introuvable'));
         } else {
             unlink($this->getParameter('upload_dir') . '/' . $produit->getPhoto());
             $em->remove($produit);
             $em->flush();
-            $this->addFlash('warning', 'Produit supprimée');
+            $this->addFlash('warning', $t->trans('produit.suprime'));
         }
         return $this->redirectToRoute('app_produit_index');
     }

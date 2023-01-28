@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
     {% block title %}eMarket Shoes{% endblock %}
     {# Liaison avec le fichier CSS #}
-    {% block link %}<link rel="stylesheet" type="text/css" href="{{ asset('/css/produit_style.css') }}">{% endblock %}
+    {% block link %}<link rel="stylesheet" type="text/css" href="{{ asset('/css/produitCSS/produit_style.css') }}">{% endblock %}
     
 {% block body %}
     <h1>eMarket Shoes</h1>
     {# Partie visible que par les ROLE_ADMIN #}
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('app_produit_new') }}" class="btn btn-primary">Create new</a>
+    <a href="{{ path('app_produit_new') }}" class="btn btn-primary">{{'create new'|trans}}</a>
     {% endif %}
 
 {# Affichage des produits#}
@@ -15,11 +15,14 @@
     {% for produit in produits %}
         <div id="div_produit">
             <div>
+                {# Partie visible que par les ROLE_ADMIN #}
+                {% if is_granted('ROLE_ADMIN') %}
                 <tr>
-                    <td>Photo :</td>
+                    <td>{{'photo'|trans}} :</td>
                 </tr>
+                {% endif %}
                 <tr>
-                    <td>{{ produit.photo }} </td>
+                    <td><img src="{{ asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}"/></td>
                 </tr>
             </div>
             <div>
@@ -34,7 +37,7 @@
             </div>
             <div>
                 <tr>
-                    <td>Nom :</td>
+                    <td>{{'nom'|trans}} :</td>
                 </tr>
         {% endif %}
                 <tr>
@@ -51,7 +54,7 @@
             </div> #}
             <div>
                 <tr>
-                    <td>Prix :</td>
+                    <td>{{'prix'|trans}} :</td>
                 </tr>
                 <tr>
                     <td>{{ produit.prix }} €</td>
@@ -76,7 +79,7 @@
         </div>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">{{'no records found'|trans}}</td>
             </tr>
     {% endfor %} 
 {% endblock %}

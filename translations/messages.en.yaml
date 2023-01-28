@@ -1,0 +1,33 @@
+produit:
+  ajoutee: Product added
+  introuvable: Product Not Found
+  mise_a_jour: Product Update
+  suprime: Product Deleted
+  produit: Produit
+
+create new: Create new
+edit: Edit
+show: Show
+create new user: Create new user
+sing in: Sing in
+login: Login
+logout: Logout 
+register: Register
+save: Save
+delete: Delete
+nom: Name
+prenom: First name
+agree terms: Agree terms
+remember me: Remember me
+please sign in: Please sign in
+password: Password
+photo: Picture
+prix: Price
+no records found: No records found
+edit produit: Edit Product
+back to list: Back to list
+new product: New product
+edit contenupanier: Modify the contents of the Cart
+edit panier: Edit the Cart
+title: Welcome to eMarket Shoes, Log in!
+msg log: You are logged in as

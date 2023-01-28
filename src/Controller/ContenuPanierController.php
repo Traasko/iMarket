@@ -29,10 +29,9 @@ class ContenuPanierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($contenuPanier->isQuantite()) {
-                $contenuPanier->setDate(new \DateTime());
-            }
-
+            
+                $contenuPanier->setAjout(new \DateTime());
+            
             $contenuPanierRepository->save($contenuPanier, true);
 
             return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);

@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit ContenuPanier
+{% block title %}{{'edit contenupanier'|trans}}
 {% endblock %}
 
 {% block body %}
-	<h1>Edit ContenuPanier</h1>
+	<h1>{{'edit contenupanier'|trans}}</h1>
 
 	{{ include('contenu_panier/_form.html.twig', {'button_label': 'Update'}) }}
 
-	<a href="{{ path('app_contenu_panier_index') }}">back to list</a>
+	<a href="{{ path('app_contenu_panier_index') }}">{{'back to list'|trans}}</a>
 
 	{{ include('contenu_panier/_delete_form.html.twig') }}
 
