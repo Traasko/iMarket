@@ -12,10 +12,8 @@
 
 {# Affichage des produits#}
 
-	{% include "produit/_list.html.twig" with {'produits': produits} %}
-
     {% for produit in produits %}
-        <div id="div_produit">
+        <div id="div_produit" class="space">
             <div>
                 {# Partie visible que par les ROLE_ADMIN #}
                 {% if is_granted('ROLE_ADMIN') %}

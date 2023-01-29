@@ -15,6 +15,10 @@ body{
     padding: 10px;
 }
 
+div#general {
+    background-color: indianred;
+}
+
 a.btn.btn-primary {
     margin-bottom: 20px;
 }
@@ -40,15 +44,11 @@ h1{
     font-size: 80px !important;
 }
 
-
+.space{
+    margin: 0px 100px 100px 0px;
+}
 
 /* Vue du produit en détail */
-
-/* #div_produit_show{
-    border: 1px solid;
-    border-radius: 10px;
-    background-color: blue;
-} */
 
 div#div_produit_show {
     display: inline-block;
@@ -81,5 +81,17 @@ div#div_produit_show {
     margin-top: 20px;
 }
 
+.info-prod{
+    font-size: 30px;
+}
+
+h2{
+    font-size: 50px !important;
+}
+
+img{
+    max-width: 239px;
+    max-height:211px;
+}
 
 
