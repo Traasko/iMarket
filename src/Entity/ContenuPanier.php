@@ -31,6 +31,13 @@ class ContenuPanier
         return $this->id;
     }
 
+    // public function setId(?Produit $id): self
+    // {
+    //     $this->id = $id;
+
+    //     return $this;
+    // }
+
     public function getProduit(): ?Produit
     {
         return $this->produit;

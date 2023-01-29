@@ -72,5 +72,8 @@
 
     {{ include('produit/_delete_form.html.twig') }}
     {% endif %}
+
+    <a href="{{ path('app_panier_new') }}" class="btn btn-primary">Ajouter au panier</a>
+
     </body> 
 {% endblock %}
