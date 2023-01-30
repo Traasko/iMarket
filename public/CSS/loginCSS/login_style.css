@@ -1,0 +1,23 @@
+/* form{
+    margin-top: 100px;
+    border: 3px solid;
+    background-color: red;
+}
+
+
+
+.form-control{
+    width: 25% !important;
+}
+
+#title_sign{
+    font-size: 40px;
+    font-family: 'Playfair Display', serif;
+} */
+
+#title{
+    margin-top: 10px !important;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 80px !important;
+}

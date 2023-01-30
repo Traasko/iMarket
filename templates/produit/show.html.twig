@@ -1,42 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit{% endblock %}
+{# Liaison avec le fichier CSS #}
+    {% block link %}<link rel="stylesheet" type="text/css" href="{{ asset('/css/produitCSS/produit_style.css') }}">{% endblock %}
+{% block title %}{{ produit.nom }}{% endblock %}
+
 
 {% block body %}
-    <h1>Produit</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ produit.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ produit.nom }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ produit.description }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ produit.prix }}</td>
-            </tr>
-            <tr>
-                <th>Stock</th>
-                <td>{{ produit.stock }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ produit.photo }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_produit_index') }}">back to list</a>
-
-    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+    <body>
+    <h1>{{ produit.nom }}</h1>
+<div id="general">
+    <div id="div_produit_show">
+        <div id="div_float_left">
+            <div>
+                <tr>
+                    {# Partie visible que par les ROLE_ADMIN #}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <td>{{'photo'|trans}} :</td>
+                    {% endif %}
+                    <td><img src="{{ asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}"/></td>
+                </tr>
+            </div>
+            {# Partie visible que par les ROLE_ADMIN #}
+            {% if is_granted('ROLE_ADMIN') %}
+            <div>
+                <tr>
+                    <td>Id :</td>
+                    <td>{{ produit.id }}</td>
+                </tr>
+            </div>
+            {% endif %}
+        </div>
+        <div id="div_float_right">
+            <div>
+                <tr>
+                {# Partie visible que par les ROLE_ADMIN #}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td>{{'nom'|trans}} :</td>
+                {% endif %}
+                    <td><h2>{{ produit.nom }}</h2></td>
+                </tr>
+            </div>
+            <div>
+                <tr>
+                    <td><span class="info-prod">{{'prix'|trans}} :</span></td>
+                    <td><span class="info-prod">{{ produit.prix }} €</span></td>
+                </tr>
+            </div>
+            <div>
+                <tr>
+                    <td><span class="info-prod">Stock :<span></td>
+                    <td><span class="info-prod">{{ produit.stock }}</span></td>
+                </tr>
+            </div>
+        </div>
+    </div>
+    <div id="div_description">
+        <tr>
+            <div id="title_description" class="uppercase">
+                <td>Description</td>
+            </div>
+            <div>
+                <td><p>{{ produit.description }}</p></td>
+            </div>
+        </tr>
+    </div> 
+</div>
+    <a href="{{ path('app_produit_index') }}" id="button_back" class="btn btn-secondary">{{'back to list'|trans}}</a>
+    {# Partie visible que par les ROLE_ADMIN #}
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning">{{'edit'|trans}}</a>
 
     {{ include('produit/_delete_form.html.twig') }}
+    {% endif %}
+
+    <a href="{{ path('app_panier_new') }}" class="btn btn-primary">Ajouter au panier</a>
+
+    </body> 
 {% endblock %}

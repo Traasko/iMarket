@@ -1,0 +1,97 @@
+/* General */
+p{
+    text-align: justify ;
+    margin-top: 10px !important;
+}
+
+body{
+    margin: 0px 100px !important;
+    background-color: rgba(51, 146, 145, 0.211) !important;
+}
+
+#general{
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+div#general {
+    background-color: indianred;
+}
+
+a.btn.btn-primary {
+    margin-bottom: 20px;
+}
+/* Vue du Produit à l'acceuil */
+#div_produit {
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+div#div_produit {
+    display: inline-block;
+}
+
+a.btn.btn-primary {
+    display: block;
+    width: 10%;
+}
+
+h1{
+    margin-top: 10px !important;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 80px !important;
+}
+
+.space{
+    margin: 0px 100px 100px 0px;
+}
+
+/* Vue du produit en détail */
+
+div#div_produit_show {
+    display: inline-block;
+}
+
+#div_float_right{
+    float: right;
+    /* background-color: red; */
+}
+
+#div_float_left{
+    float: left;
+    /* background-color:green; */
+}
+
+div#div_produit_show {
+    display: flow-root;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}
+
+#title_description{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#button_back{
+    margin-top: 20px;
+}
+
+.info-prod{
+    font-size: 30px;
+}
+
+h2{
+    font-size: 50px !important;
+}
+
+img{
+    max-width: 239px;
+    max-height:211px;
+}
+
+

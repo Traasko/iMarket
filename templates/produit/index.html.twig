@@ -1,10 +1,85 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Article index
-{% endblock %}
-
+    {% block title %}eMarket Shoes{% endblock %}
+    {# Liaison avec le fichier CSS #}
+    {% block link %}<link rel="stylesheet" type="text/css" href="{{ asset('/css/produitCSS/produit_style.css') }}">{% endblock %}
+    
 {% block body %}
+    <h1>eMarket Shoes</h1>
+    {# Partie visible que par les ROLE_ADMIN #}
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_produit_new') }}" class="btn btn-primary">{{'create new'|trans}}</a>
+    {% endif %}
 
-	{% include "produit/_list.html.twig" with {'produits': produits} %}
+{# Affichage des produits#}
 
+    {% for produit in produits %}
+        <div id="div_produit" class="space">
+            <div>
+                {# Partie visible que par les ROLE_ADMIN #}
+                {% if is_granted('ROLE_ADMIN') %}
+                <tr>
+                    <td>{{'photo'|trans}} :</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td><img src="{{ asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}"/></td>
+                </tr>
+            </div>
+            <div>
+        {# Partie visible que par les ROLE_ADMIN #}
+        {% if is_granted('ROLE_ADMIN') %}
+                <tr>
+                    <td>ID :</td>
+                </tr>
+                <tr>
+                    <td>{{ produit.id }} </td>
+                </tr>
+            </div>
+            <div>
+                <tr>
+                    <td>{{'nom'|trans}} :</td>
+                </tr>
+        {% endif %}
+                <tr>
+                    <td>{{ produit.nom }} </td>
+                </tr>
+            </div>
+            {# <div>
+                <tr>
+                    <td>Description :</td>
+                </tr>
+                <tr>
+                    <td>{{ produit.description }} </td>
+                </tr>
+            </div> #}
+            <div>
+                <tr>
+                    <td>{{'prix'|trans}} :</td>
+                </tr>
+                <tr>
+                    <td>{{ produit.prix }} €</td>
+                </tr>
+            </div>
+            {# <div>
+                <tr>
+                    <td>Quantité :</td>
+                </tr>
+                <tr>
+                    <td>{{ produit.stock }} </td>
+                </tr>
+            </div> #}
+            <div>
+                <td>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }} "><i class="bi bi-info-circle"></i></a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}"><i class="bi bi-vector-pen"></i></a>
+                    {% endif %}
+                </td>
+            </div>
+        </div>
+        {% else %}
+            <tr>
+                <td colspan="7">{{'no records found'|trans}}</td>
+            </tr>
+    {% endfor %} 
 {% endblock %}

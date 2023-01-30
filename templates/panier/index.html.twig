@@ -5,6 +5,38 @@
 
 {% block body %}
 
-	{% include "panier/_list.html.twig" with {'paniers': paniers} %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Achat</th>
+				<th>Etat</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for panier in paniers %}
+				<tr>
+					<td>{{ panier.id }}</td>
+					<td>{{ panier.achat ? panier.achat|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ panier.etat ? 'Yes' : 'No' }}</td>
+					<td>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a class="btn btn-primary" href="{{ path('app_panier_show', {'id': panier.id}) }}">Voir</a>
+							<a class="btn btn-warning" href="{{ path('app_panier_edit', {'id': panier.id}) }}">Modifier</a>
+							<a class="btn btn-danger" href="{{ path('app_panier_delete', {'id': panier.id}) }}">Supprimer</a>
+						{% endif %}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
 
+		</tbody>
+	</table>
+	{% if is_granted('ROLE_ADMIN') %}
+		<a href="{{ path('app_panier_new') }}">Create new</a>
+	{% endif %}
 {% endblock %}

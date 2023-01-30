@@ -1,10 +1,22 @@
 {% extends 'base.html.twig' %}
+{% block link %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('/css/loginCSS/login_style.css') }}">						
+	<link rel="icon" type="image/png" href="/css/loginCSS/images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/css/loginCSS/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/loginCSS/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/loginCSS/fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/loginCSS/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="/css/loginCSS/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/loginCSS/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/loginCSS/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/loginCSS/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="/css/loginCSS/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/loginCSS/css/main.css">
+{% endblock %} 
 
-{% block title %}Log in!
-{% endblock %}
+{% block title %}{{'title'|trans}}{% endblock %}
 
 {% block body %}
-	{# action="{{ path('app_panier_index') }}" #}
 	<form method="post">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -12,22 +24,70 @@
 
 		{% if app.user %}
 			<div class="mb-3">
-				You are logged in as
-				{{ app.user.userIdentifier }},
-				<a href="{{ path('app_logout') }}">Logout</a>
+				{{'msg log'|trans}} {{ app.user.userIdentifier }},
+				<a href="{{ path('app_logout') }}" class="btn btn-secondary">{{'logout'|trans}}</a>
 			</div>
 		{% endif %}
 
-		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-		<label for="inputEmail">Email</label>
-		<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-		<label for="inputPassword">Password</label>
-		<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-		<button class="btn btn-primary" type="submit">
-			Sign in
-		</button>
+		<h1 id="title">eMarket Shoes</h1>
+		<div class="limiter">
+			<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+				<div class="wrap-login100">
+					<form class="login100-form validate-form">
+						<span class="login100-form-logo">
+							<i class="zmdi zmdi-landscape"></i>
+						</span>
+						<span class="login100-form-title p-b-34 p-t-27">
+							{{'please sign in'|trans}}
+						</span>
+						<div class="wrap-input100 validate-input" data-validate = "Enter email">
+							<input id="inputEmail" class="input100 autocomplete="email" required autofocus" type="email" name="email" placeholder="Email">
+							<span class="focus-input100" data-placeholder="&#xf207;"></span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate="Enter password">
+							<input id="inputPassword" class="input100 autocomplete="current-password" required" type="password" name="password" placeholder="{{'password'|trans}}">
+							<span class="focus-input100" data-placeholder="&#xf191;"></span>
+						</div>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="_remember_me">
+							<label class="label-checkbox100" for="ckb1">
+								{{'remember me'|trans}}
+							</label>
+						</div>
+						<div class="container-login100-form-btn">
+							<button class="login100-form-btn" type="submit">
+								{{'sing in'|trans}}
+							</button>
+						</div>
+						{# <div class="text-center p-t-90">
+							<a class="txt1" href="#">
+								Forgot Password?
+							</a>
+						</div> #}
+					</form>
+				</div>
+			</div>
+		</div>
 	</form>
+
+	<div id="dropDownSelect1"></div>
+		
+	<!--===============================================================================================-->
+		<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+		<script src="vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+		<script src="vendor/bootstrap/js/popper.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+		<script src="vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+		<script src="vendor/daterangepicker/moment.min.js"></script>
+		<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+		<script src="vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+		<script src="js/main.js"></script>
+
 {% endblock %}

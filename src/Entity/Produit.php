@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
@@ -23,9 +24,11 @@ class Produit
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero]
     private ?float $prix = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero]
     private ?int $stock = null;
 
     #[ORM\Column(length: 255)]
@@ -133,6 +136,7 @@ class Produit
 
         return $this;
     }
+
     public function __toString()
     {
         return $this->nom;

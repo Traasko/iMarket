@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Panier;
+use App\Entity\ContenuPanier;
 use App\Form\PanierType;
 use App\Repository\PanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -99,6 +100,6 @@ class PanierController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('app_article_show', ['id' => $panier->getContenuPaniers()->getId()]);
+        return $this->redirectToRoute('app_article_show', ['id' => $panier->getContenuPaniers()->getId() ]);
     }
 }
