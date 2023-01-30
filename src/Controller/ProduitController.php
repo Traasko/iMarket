@@ -119,7 +119,7 @@ class ProduitController extends AbstractController
     public function delete(EntityManagerInterface $em, Produit $produit): Response
     {
         if ($produit == null) {
-            $this->addFlash('danger', 'Marque introuvable');
+            $this->addFlash('danger', 'Produit introuvable');
         } else {
             unlink($this->getParameter('upload_dir') . '/' . $produit->getPhoto());
             $em->remove($produit);

@@ -35,6 +35,11 @@ security:
     - { path: panier, roles: ROLE_ADMIN }
     - { path: produit, roles: ROLE_ADMIN }
     - { path: user, roles: ROLE_ADMIN }
+
+    - { path: contenu_panier, roles: ROLE_USER }
+    - { path: panier, roles: ROLE_USER }
+    - { path: produit, roles: ROLE_USER }
+    - { path: user, roles: ROLE_USER }
     # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
