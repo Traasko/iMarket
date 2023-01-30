@@ -15,18 +15,14 @@
     {% for produit in produits %}
         <div id="div_produit" class="space">
             <div>
-                {# Partie visible que par les ROLE_ADMIN #}
-                {% if is_granted('ROLE_ADMIN') %}
                 <tr>
-                    <td>{{'photo'|trans}} :</td>
-                </tr>
-                {% endif %}
-                <tr>
-                    <td><img src="{{ asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}"/></td>
+                    <td>
+                        <img src="{{asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}"/>
+                    </td>
                 </tr>
             </div>
             <div>
-        {# Partie visible que par les ROLE_ADMIN #}
+        {# Partie visible que par les ROLE_ADMIN
         {% if is_granted('ROLE_ADMIN') %}
                 <tr>
                     <td>ID :</td>
@@ -35,23 +31,12 @@
                     <td>{{ produit.id }} </td>
                 </tr>
             </div>
+        {% endif %} #}
             <div>
-                <tr>
-                    <td>{{'nom'|trans}} :</td>
-                </tr>
-        {% endif %}
                 <tr>
                     <td>{{ produit.nom }} </td>
                 </tr>
             </div>
-            {# <div>
-                <tr>
-                    <td>Description :</td>
-                </tr>
-                <tr>
-                    <td>{{ produit.description }} </td>
-                </tr>
-            </div> #}
             <div>
                 <tr>
                     <td>{{'prix'|trans}} :</td>
@@ -60,17 +45,18 @@
                     <td>{{ produit.prix }} €</td>
                 </tr>
             </div>
-            {# <div>
+            <div>
                 <tr>
-                    <td>Quantité :</td>
+                    <td>Stock :</td>
                 </tr>
                 <tr>
-                    <td>{{ produit.stock }} </td>
+                    <td>{{ produit.stock }}</td>
                 </tr>
-            </div> #}
+            </div>
             <div>
                 <td>
                     <a href="{{ path('app_produit_show', {'id': produit.id}) }} "><i class="bi bi-info-circle"></i></a>
+                    {# Partie visible que par les ROLE_ADMIN #}
                     {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}"><i class="bi bi-vector-pen"></i></a>
                     {% endif %}

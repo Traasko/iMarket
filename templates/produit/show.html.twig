@@ -13,14 +13,10 @@
         <div id="div_float_left">
             <div>
                 <tr>
-                    {# Partie visible que par les ROLE_ADMIN #}
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <td>{{'photo'|trans}} :</td>
-                    {% endif %}
                     <td><img src="{{ asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}"/></td>
                 </tr>
             </div>
-            {# Partie visible que par les ROLE_ADMIN #}
+            {# Partie visible que par les ROLE_ADMIN
             {% if is_granted('ROLE_ADMIN') %}
             <div>
                 <tr>
@@ -28,15 +24,15 @@
                     <td>{{ produit.id }}</td>
                 </tr>
             </div>
-            {% endif %}
+            {% endif %} #}
         </div>
         <div id="div_float_right">
             <div>
                 <tr>
                 {# Partie visible que par les ROLE_ADMIN #}
-                {% if is_granted('ROLE_ADMIN') %}
+                {# {% if is_granted('ROLE_ADMIN') %}
                     <td>{{'nom'|trans}} :</td>
-                {% endif %}
+                {% endif %} #}
                     <td><h2>{{ produit.nom }}</h2></td>
                 </tr>
             </div>
@@ -73,7 +69,7 @@
     {{ include('produit/_delete_form.html.twig') }}
     {% endif %}
 
-    <a href="{{ path('app_panier_new') }}" class="btn btn-primary">Ajouter au panier</a>
+    <a href="{{ path('app_contenu_panier_new') }}" class="btn btn-primary">Ajouter au panier</a>
 
     </body> 
 {% endblock %}

@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
 
-{% block title %}ContenuPanier index
-{% endblock %}
+{# {% block title %}ContenuPanier index
+{% endblock %} #}
 
 {% block body %}
-	<h1>ContenuPanier index</h1>
+	<h1>Mon Panier</h1>
 
 	<table class="table">
 		<thead>
@@ -37,6 +37,6 @@
 		</tbody>
 	</table>
 	{% if is_granted('ROLE_ADMIN') %}
-		<a href="{{ path('app_contenu_panier_new') }}">Create new</a>
+		<a href="{{ path('app_contenu_panier_new') }}" class="btn btn-primary">{{"create new"|trans}}</a>
 	{% endif %}
 {% endblock %}
