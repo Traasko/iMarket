@@ -10,11 +10,11 @@
 		<thead>
 			<tr>
 				<th>Id</th>
-				<th>Nom</th>
+				<th>{{'nom'|trans}}</th>
 				<th>Description</th>
-				<th>Prix</th>
+				<th>{{'prix'|trans}}</th>
 				<th>Stock</th>
-				<th>Photo</th>
+				<th>{{'photo'|trans}}</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -29,20 +29,20 @@
 					<td>{{ produit.photo }}</td>
 					<td>
 						{% if is_granted('ROLE_ADMIN') %}
-							<a class="btn btn-primary" href="{{ path('app_produit_show', {'id': produit.id}) }}">Voir</a>
-							<a class="btn btn-warning" href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
-							<a class="btn btn-danger" href="{{ path('app_produit_delete', {'id': produit.id}) }}">Supprimer</a>
+							<a class="btn btn-primary" href="{{ path('app_produit_show', {'id': produit.id}) }}">{{'show'|trans}}</a>
+							<a class="btn btn-warning" href="{{ path('app_produit_edit', {'id': produit.id}) }}">{{'edit'|trans}}</a>
+							<a class="btn btn-danger" href="{{ path('app_produit_delete', {'id': produit.id}) }}">{{'delete'|trans}}</a>
 						{% endif %}
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="7">no records found</td>
+					<td colspan="7">{{'no records found'|trans}}</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	{% if is_granted('ROLE_ADMIN') %}
-		<a href="{{ path('app_produit_new') }}">Create new</a>
+		<a href="{{ path('app_produit_new') }}">{{'create new'|trans}}</a>
 	{% endif %}
 {% endblock %}

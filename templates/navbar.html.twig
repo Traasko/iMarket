@@ -12,7 +12,7 @@
         <a class="nav-link active" aria-current="page" href="{{path('app_produit_index') }}">Acceuil</a>
         <a class="nav-link" href="{{path('app_panier_index') }}">Panier</a>
         {% if is_granted('ROLE_USER') %}
-        <a class="nav-link" href="">Mon Compte</a> 
+        <a class="nav-link" href="#">Mon Compte</a> 
         {% endif %}
         <a class="nav-link" href="{{path('app_login') }}">Login</a>
         <a class="nav-link" href="{{path('app_register') }}">Register</a>

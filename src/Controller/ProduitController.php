@@ -107,7 +107,7 @@ class ProduitController extends AbstractController
             $em->persist($produit);
             $em->flush();
 
-            $this->addFlash('success', $t->trans('produit.mise_a_jour'));
+            $this->addFlash('warning', $t->trans('produit.mise_a_jour'));
         }
 
         return $this->render('produit/edit.html.twig', [
@@ -120,13 +120,12 @@ class ProduitController extends AbstractController
     public function delete(EntityManagerInterface $em, Produit $produit, TranslatorInterface $t): Response
     {
         if ($produit == null) {
-            $this->addFlash('danger', 'Produit introuvable');
             $this->addFlash('danger', $t->trans('produit.introuvable'));
         } else {
             unlink($this->getParameter('upload_dir') . '/' . $produit->getPhoto());
             $em->remove($produit);
             $em->flush();
-            $this->addFlash('warning', $t->trans('produit.suprime'));
+            $this->addFlash('danger', $t->trans('produit.suprime'));
         }
         return $this->redirectToRoute('app_produit_index');
     }

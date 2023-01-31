@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ContenuPanier{% endblock %}
+{% block title %}{{'Contenu de mon Panier'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>ContenuPanier</h1>
+    <h1>{{'Contenu de mon Panier'|trans}}</h1>
 
     <table class="table">
         <tbody>
@@ -12,11 +12,11 @@
                 <td>{{ contenu_panier.id }}</td>
             </tr>
             <tr>
-                <th>Quantite</th>
+                <th>Stock</th>
                 <td>{{ contenu_panier.quantite }}</td>
             </tr>
             <tr>
-                <th>Ajout</th>
+                <th>{{'ajout'|trans}}</th>
                 <td>{{ contenu_panier.ajout ? contenu_panier.ajout|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
@@ -28,6 +28,6 @@
 
     {{ include('contenu_panier/_delete_form.html.twig') }}
 
-    <a href="{{ path('app_panier_new') }}" class="btn btn-success">Ajouter au panier</a>
+    <a href="{{ path('app_panier_new') }}" class="btn btn-success">{{'Ajouter au Panier'|trans}}</a>
 
 {% endblock %}

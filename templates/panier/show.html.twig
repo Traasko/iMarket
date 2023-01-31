@@ -3,7 +3,7 @@
 {% block title %}Panier{% endblock %}
 
 {% block body %}
-    <h1>Panier</h1>
+    <h1>{{'Panier'|trans}}</h1>
 
     <table class="table">
         <tbody>
@@ -12,7 +12,7 @@
                 <td>{{ panier.id }}</td>
             </tr>
             <tr>
-                <th>Achats</th>
+                <th>{{'Achats'|trans}}</th>
                 <td>{{ panier.achat ? panier.achat|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter au Panier{% endblock %}
+{% block title %}{{'Ajouter au Panier'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>Ajouter au Panier</h1>
+    <h1>{{'Ajouter au Panier'|trans}}</h1>
 
     {{ include('contenu_panier/_form.html.twig') }}
 

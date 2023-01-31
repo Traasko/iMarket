@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/contenu/panier')]
 class ContenuPanierController extends AbstractController
@@ -22,7 +23,7 @@ class ContenuPanierController extends AbstractController
     }
 
     #[Route('/new', name: 'app_contenu_panier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ContenuPanierRepository $contenuPanierRepository): Response
+    public function new(Request $request, TranslatorInterface $t, ContenuPanierRepository $contenuPanierRepository): Response
     {
         $contenuPanier = new ContenuPanier();
         $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
@@ -35,7 +36,7 @@ class ContenuPanierController extends AbstractController
 
             return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
 
-            $this->addFlash('success', 'Contenu ajouté');
+            $this->addFlash('success', $t->trans('contenu.ajoute'));
         }
 
         return $this->render('contenu_panier/new.html.twig', [
@@ -53,7 +54,7 @@ class ContenuPanierController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_contenu_panier_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ContenuPanier $contenuPanier, ContenuPanierRepository $contenuPanierRepository): Response
+    public function edit(Request $request, TranslatorInterface $t, ContenuPanier $contenuPanier, ContenuPanierRepository $contenuPanierRepository): Response
     {
         $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
         $form->handleRequest($request);
@@ -63,7 +64,7 @@ class ContenuPanierController extends AbstractController
 
             return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
 
-            $this->addFlash('success', 'Contenu modifier');
+            $this->addFlash('warning', $t->trans('contenu.modifier'));
         }
 
         return $this->render('contenu_panier/edit.html.twig', [
@@ -73,12 +74,12 @@ class ContenuPanierController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_contenu_panier_delete', methods: ['POST'])]
-    public function delete(Request $request, ContenuPanier $contenuPanier, ContenuPanierRepository $contenuPanierRepository): Response
+    public function delete(Request $request, TranslatorInterface $t, ContenuPanier $contenuPanier, ContenuPanierRepository $contenuPanierRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $contenuPanier->getId(), $request->request->get('_token'))) {
             $contenuPanierRepository->remove($contenuPanier, true);
 
-            $this->addFlash('warning', 'Contenu  supprimé');
+            $this->addFlash('danger', $t->trans('contenu.suprimer'));
         }
 
         return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);

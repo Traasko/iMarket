@@ -32,3 +32,34 @@ edit panier: Modifier le Panier
 logout: Se déconnecter
 msg log: Vous êtes connecté en tant que
 create a new produit: Crée un nouveau Produit
+ajout: Ajout
+Mon Panier: Mon Panier
+Ajouter au Panier: Ajouter au Panier
+Contenu de mon Panier: Contenu de mon Panier
+Achat: Achat
+Etat: Etat
+Create new Panier: Crée un nouveau panier
+New Panier: Nouveau Panier
+Panier: Panier
+
+contenu:
+  ajoute: Contenu Ajouté
+  modifier: Contenu Modifié
+  suprimer: Contenu Suprimé
+
+article:
+  ajoute: Article Ajouté
+  modifier: Article Modifié
+  suprimer: Article Suprimé
+
+user:
+  ajoute: Utilisateur Ajouté
+  modifier: Utilisateur Modifié
+  suprimer: Utilisateur Suprimé
+
+error:
+  titre: Oups ! Cette page n'a pas pu être trouvée
+  back: Retour à la page d'acceuil
+  msg 403: L'utilisateur n'est pas autorisé à accéder à cette ressource avec un refus explicite. 
+  msg 404: Désolé, La page n'a pas été trouvée ! 
+  msg 500: Erreur de serveur interne . 

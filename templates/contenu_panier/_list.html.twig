@@ -4,14 +4,14 @@
 {% endblock %} #}
 
 {% block body %}
-	<h1>Mon Panier</h1>
+	<h1>{{'Mon Panier'|trans}}</h1>
 
 	<table class="table">
 		<thead>
 			<tr>
 				<th>Id</th>
-				<th>Quantite</th>
-				<th>Ajout</th>
+				<th>Stock</th>
+				<th>{{'ajout'|trans}}</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -23,15 +23,15 @@
 					<td>{{ contenu_panier.ajout ? contenu_panier.ajout|date('Y-m-d H:i:s') : '' }}</td>
 					<td>
 						{% if is_granted('ROLE_ADMIN') %}
-							<a class="btn btn-primary" href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}">Voir</a>
-							<a class="btn btn-warning" href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}">Modifier</a>
-							<a class="btn btn-danger" href="{{ path('app_contenu_panier_delete', {'id': contenu_panier.id}) }}">Supprimer</a>
+							<a class="btn btn-primary" href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}">{{'show'|trans}}</a>
+							<a class="btn btn-warning" href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}">{{'edit'|trans}}</a>
+							<a class="btn btn-danger" href="{{ path('app_contenu_panier_delete', {'id': contenu_panier.id}) }}">{{'delete'|trans}}</a>
 						{% endif %}
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="4">no records found</td>
+					<td colspan="4">{{'no records found'|trans}}</td>
 				</tr>
 			{% endfor %}
 		</tbody>

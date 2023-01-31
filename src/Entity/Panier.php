@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Produit;
 use App\Repository\PanierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

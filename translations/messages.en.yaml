@@ -32,3 +32,34 @@ edit panier: Edit the Cart
 title: Welcome to eMarket Shoes, Log in!
 msg log: You are logged in as
 create a new produit: Create a new Product
+ajout: Ajout
+Mon Panier: My Carts
+Ajouter au Panier: Add to carts
+Contenu de mon Panier: Contents of my cart
+Achat: Purchase
+Etat: Status
+Create new Panier: Create new Cart
+New Panier: New Cart
+Panier: Cart
+
+contenu:
+  ajoute: Content Added
+  modifier: Content Modified
+  suprimer: Content Deleted
+
+article:
+  ajoute: Item Added
+  modifier: Item Modified
+  suprimer: Item Deleted
+
+user:
+  ajoute: Item Added
+  modifier: Item Modified
+  suprimer: Item Deleted
+
+error:
+  titre: Oops! This Page Could Not Be Found
+  back: Go To Homepage
+  msg 403: User is not authorized to access this resource with an explicit deny . 
+  msg 404: Sorry, The Page not found ! 
+  msg 500: Internal Server Error . 

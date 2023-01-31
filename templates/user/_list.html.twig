@@ -13,8 +13,8 @@
 				<th>Email</th>
 				<th>Roles</th>
 				<th>Password</th>
-				<th>Nom</th>
-				<th>Prenom</th>
+				<th>{{'nom'|trans}}</th>
+				<th>{{'prenom'|trans}}</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -28,21 +28,21 @@
 					<td>{{ user.nom }}</td>
 					<td>{{ user.prenom }}</td>
 					<td>
-						<a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-primary">Voir</a>
-						<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-secondary">Modifier</a>
+						<a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-primary">{{'show'|trans}}</a>
+						<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-secondary">{{'edit'|trans}}</a>
 						{% if is_granted('ROLE_ADMIN') %}
-							<a href="{{ path('app_user_delete', {'id': user.id}) }}" class="btn btn-danger">Supprimer</a>
+							<a href="{{ path('app_user_delete', {'id': user.id}) }}" class="btn btn-danger">{{'delete'|trans}}</a>
 						{% endif %}
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="7">no records found</td>
+					<td colspan="7">{{'no records found'|trans}}</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	{% if is_granted('ROLE_ADMIN') %}
-		<a href="{{ path('app_user_new') }}">Create new</a>
+		<a href="{{ path('app_user_new') }}">{{'create new'|trans}}</a>
 	{% endif %}
 {% endblock %}
