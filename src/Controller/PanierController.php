@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Panier;
-use App\Entity\ContenuPanier;
 use App\Form\PanierType;
 use App\Repository\PanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -100,6 +99,24 @@ class PanierController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('app_article_show', ['id' => $panier->getContenuPaniers()->getId() ]);
+        return $this->redirectToRoute('app_article_show', ['id' => $panier->getContenuPaniers()->getId()]);
+    }
+
+    #[Route('/superadmin', name: 'super_admin_panier')]
+    public function superAdmin(EntityManagerInterface $em)
+    {
+        // Récupération du Entity Panier
+        $entityPanier = $this->getDoctrine()->getManager();
+
+        // Récupération du panier correspondant à l'identifiant spécifié
+        $panier = $entityPanier->getRepository(Panier::class)->find($id);
+
+        // Récupération de l'utilisateur associé au panier
+        $user = $panier->getUser();
+
+        $em->persist($panier);
+        $em->flush();
+
+        return $this->redirectToRoute('app_article_show', ['id' => $panier->getContenuPaniers()->getId()]);
     }
 }
