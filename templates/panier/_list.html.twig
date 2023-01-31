@@ -10,6 +10,7 @@
 		<thead>
 			<tr>
 				<th>Id</th>
+				<th>Photo</th>
 				<th>Achat</th>
 				<th>Etat</th>
 				<th>Actions</th>
@@ -19,6 +20,7 @@
 			{% for panier in paniers %}
 				<tr>
 					<td>{{ panier.id }}</td>
+					<td>{{ produit.photo }}</td>
 					<td>{{ panier.achat ? panier.achat|date('Y-m-d H:i:s') : '' }}</td>
 					<td>{{ panier.etat ? 'Yes' : 'No' }}</td>
 					<td>

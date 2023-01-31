@@ -3,9 +3,9 @@
 {% block title %}{{'new product'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>{{'create a new'|trans}} {{'produit.produit'|trans}}</h1>
+    <h1>{{'create a new produit'|trans}}</h1>
 
     {{ include('produit/_form.html.twig') }}
 
-    <a href="{{ path('app_produit_index') }}">{{'back to list'|trans}}</a>
+    <a href="{{ path('app_produit_index') }}" id="back" class="btn btn-secondary"><i class="bi bi-caret-left-fill"></i>{{'back to list'|trans}}</a>
 {% endblock %}

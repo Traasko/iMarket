@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Produit;
 use App\Repository\ContenuPanierRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;

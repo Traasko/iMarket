@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{path('app_produit_index') }}">eMarketShoes</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="{{path('app_produit_index') }}">Acceuil</a>
+        <a class="nav-link" href="{{path('app_panier_index') }}">Panier</a>
+        {% if is_granted('ROLE_USER') %}
+        <a class="nav-link" href="">Mon Compte</a> 
+        {% endif %}
+        <a class="nav-link" href="{{path('app_login') }}">Login</a>
+        <a class="nav-link" href="{{path('app_register') }}">Register</a>
+      </div>
+    </div>
+  </div>
+</nav>
+{% endblock %}

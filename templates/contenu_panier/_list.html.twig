@@ -1,13 +1,14 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
 
-{% block title %}ContenuPanier index
-{% endblock %}
+{# {% block title %}ContenuPanier index
+{% endblock %} #}
 
-{% block body %}
-	<h1>ContenuPanier index</h1>
+	{% block body %}
+		<h1>
+	Mon Panier
+	</h1>
 
-	<table class="table">
-		<thead>
+		<table class="table"> <thead>
 			<tr>
 				<th>Id</th>
 				<th>Quantite</th>
@@ -37,6 +38,5 @@
 		</tbody>
 	</table>
 	{% if is_granted('ROLE_ADMIN', 'ROLE_SUPER_ADMIN') %}
-		<a href="{{ path('app_contenu_panier_new') }}">Create new</a>
-	{% endif %}
-{% endblock %}
+		<a href="{{path('app_contenu_panier_new')}}" class="btnbtn-primary">{{"createnew"|trans}}</a>
+	{% endblock %}

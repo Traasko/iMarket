@@ -7,7 +7,7 @@
     <h1>eMarket Shoes</h1>
     {# Partie visible que par les ROLE_ADMIN #}
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('app_produit_new') }}" class="btn btn-primary">{{'create new'|trans}}</a>
+    <a href="{{ path('app_produit_new') }}" class="btn btn-primary" id="create">{{'create new'|trans}}</a>
     {% endif %}
 
 {# Affichage des produits#}
@@ -15,12 +15,6 @@
     {% for produit in produits %}
         <div id="div_produit" class="space">
             <div>
-                {# Partie visible que par les ROLE_ADMIN #}
-                {% if is_granted('ROLE_ADMIN') %}
-                <tr>
-                    <td>{{'photo'|trans}} :</td>
-                </tr>
-                {% endif %}
                 <tr>
                     <td><img src="{{ asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}"/></td>
                 </tr>
@@ -35,10 +29,10 @@
                     <td>{{ produit.id }} </td>
                 </tr>
             </div>
-            <div>
-                <tr>
-                    <td>{{'nom'|trans}} :</td>
-                </tr>
+            <div class="fs-2 fw-bold">
+                {# <tr>
+                    <td>Nom :</td>
+                </tr> #}
         {% endif %}
                 <tr>
                     <td>{{ produit.nom }} </td>
@@ -52,25 +46,25 @@
                     <td>{{ produit.description }} </td>
                 </tr>
             </div> #}
-            <div>
+            <div class="fw-semibold">
                 <tr>
-                    <td>{{'prix'|trans}} :</td>
+                    <td>Prix :</td>
                 </tr>
                 <tr>
                     <td>{{ produit.prix }} €</td>
                 </tr>
             </div>
-            {# <div>
+            <div class="fw-semibold">
                 <tr>
-                    <td>Quantité :</td>
+                    <td>Stock :</td>
                 </tr>
                 <tr>
                     <td>{{ produit.stock }} </td>
                 </tr>
-            </div> #}
+            </div>
             <div>
                 <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }} "><i class="bi bi-info-circle"></i></a>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }} "><i class="bi bi-eye-fill"></i></a>
                     {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}"><i class="bi bi-vector-pen"></i></a>
                     {% endif %}
@@ -79,7 +73,7 @@
         </div>
         {% else %}
             <tr>
-                <td colspan="7">{{'no records found'|trans}}</td>
+                <td colspan="7">no records found</td>
             </tr>
     {% endfor %} 
 {% endblock %}
