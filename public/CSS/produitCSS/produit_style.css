@@ -16,13 +16,17 @@ body{
 }
 
 div#general {
-    background-color: indianred;
+    background-color: rgba(200, 225, 235, 0.762);
 }
 
 a.btn.btn-primary {
     margin-bottom: 20px;
 }
 /* Vue du Produit à l'acceuil */
+#create{
+    width: 10% !important;
+}
+
 #div_produit {
   border: 1px solid;
   border-radius: 10px;
@@ -47,6 +51,14 @@ h1{
 .space{
     margin: 0px 100px 100px 0px;
 }
+
+i.bi.bi-info-circle {
+    font-size: 30px;
+}
+
+/* div{
+    font-size: 30px;
+} */
 
 /* Vue du produit en détail */
 
@@ -96,4 +108,21 @@ img{
     border-top-right-radius: 10px;
 }
 
+a.btn.btn-primary {
+    margin-top: 20px;
+    width: 50px;
+}
 
+i.bi.bi-eye-fill{
+    font-size: 40px;
+    color: black;
+}
+
+i.bi.bi-vector-pen{
+    font-size: 40px;
+    color: black;
+}
+
+#back{
+    margin-top: 20px !important;
+}

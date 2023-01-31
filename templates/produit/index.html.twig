@@ -7,7 +7,7 @@
     <h1>eMarket Shoes</h1>
     {# Partie visible que par les ROLE_ADMIN #}
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('app_produit_new') }}" class="btn btn-primary">{{'create new'|trans}}</a>
+    <a href="{{ path('app_produit_new') }}" class="btn btn-primary" id="create">{{'create new'|trans}}</a>
     {% endif %}
 
 {# Affichage des produits#}
@@ -16,13 +16,11 @@
         <div id="div_produit" class="space">
             <div>
                 <tr>
-                    <td>
-                        <img src="{{asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}"/>
-                    </td>
+                    <td><img src="{{ asset('uploads/' ~ produit.photo) }}" alt="{{ produit.nom }}"/></td>
                 </tr>
             </div>
             <div>
-        {# Partie visible que par les ROLE_ADMIN
+        {# Partie visible que par les ROLE_ADMIN #}
         {% if is_granted('ROLE_ADMIN') %}
                 <tr>
                     <td>ID :</td>
@@ -31,32 +29,42 @@
                     <td>{{ produit.id }} </td>
                 </tr>
             </div>
-        {% endif %} #}
-            <div>
+            <div class="fs-2 fw-bold">
+                {# <tr>
+                    <td>Nom :</td>
+                </tr> #}
+        {% endif %}
                 <tr>
                     <td>{{ produit.nom }} </td>
                 </tr>
             </div>
-            <div>
+            {# <div>
                 <tr>
-                    <td>{{'prix'|trans}} :</td>
+                    <td>Description :</td>
+                </tr>
+                <tr>
+                    <td>{{ produit.description }} </td>
+                </tr>
+            </div> #}
+            <div class="fw-semibold">
+                <tr>
+                    <td>Prix :</td>
                 </tr>
                 <tr>
                     <td>{{ produit.prix }} €</td>
                 </tr>
             </div>
-            <div>
+            <div class="fw-semibold">
                 <tr>
                     <td>Stock :</td>
                 </tr>
                 <tr>
-                    <td>{{ produit.stock }}</td>
+                    <td>{{ produit.stock }} </td>
                 </tr>
             </div>
             <div>
                 <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }} "><i class="bi bi-info-circle"></i></a>
-                    {# Partie visible que par les ROLE_ADMIN #}
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }} "><i class="bi bi-eye-fill"></i></a>
                     {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}"><i class="bi bi-vector-pen"></i></a>
                     {% endif %}
@@ -65,7 +73,7 @@
         </div>
         {% else %}
             <tr>
-                <td colspan="7">{{'no records found'|trans}}</td>
+                <td colspan="7">no records found</td>
             </tr>
     {% endfor %} 
 {% endblock %}
