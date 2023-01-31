@@ -28,13 +28,16 @@
 					<td>{{ user.nom }}</td>
 					<td>{{ user.prenom }}</td>
 					<td>
-						<a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-primary">{{'show'|trans}}</a>
-						<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-secondary">{{'edit'|trans}}</a>
-						{% if is_granted('ROLE_ADMIN') %}
-							<a href="{{ path('app_user_delete', {'id': user.id}) }}" class="btn btn-danger">{{'delete'|trans}}</a>
+						{% if is_granted('ROLE_ADMIN', 'ROLE_SUPER_ADMIN') %}
+							<a href="{{ path('app_user_show', {'id': user.id}) }}">{{'show'|trans}}</a>
+							<a href="{{ path('app_user_edit', {'id': user.id}) }}">{{'edit'|trans}}</a>
+							<a href="{{ path('app_user_delete', {'id': user.id}) }}">{{'delete'|trans}}</a>
 						{% endif %}
 					</td>
 				</tr>
+			</td>
+		</tbody>
+	</tr>
 			{% else %}
 				<tr>
 					<td colspan="7">{{'no records found'|trans}}</td>
@@ -42,7 +45,7 @@
 			{% endfor %}
 		</tbody>
 	</table>
-	{% if is_granted('ROLE_ADMIN') %}
-		<a href="{{ path('app_user_new') }}">{{'create new'|trans}}</a>
-	{% endif %}
+{% if is_granted('ROLE_ADMIN', 'ROLE_SUPER_ADMIN') %}
+<a href="{{ path('app_user_new') }}">{{'create new'|trans}}</a>
+{% endif %}
 {% endblock %}
