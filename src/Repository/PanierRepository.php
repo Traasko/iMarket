@@ -65,7 +65,6 @@ class PanierRepository extends ServiceEntityRepository
         $query = $qb->getQuery();
         return $query->getResult();
     }
-
     //    public function findOneBySomeField($value): ?Panier
     //    {
     //        return $this->createQueryBuilder('p')
